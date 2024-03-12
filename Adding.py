@@ -28,6 +28,7 @@ def main():
         print("2. List all To-Dos")
         print("3. Delete a ToDo")
         print("4. exit the application")
+        print("5. Help")
         choice = input("Enter your choice: ")
         
         if choice == '1':
@@ -42,6 +43,8 @@ def main():
             delete_todo(index)
         elif choice == '4':
             exit_app()
+        elif choice == '5':
+            display_help()
         else:
             print("Invalid choice. Please try again.")
         
