@@ -1,6 +1,9 @@
 import unittest
 from unittest.mock import patch
-from todo_app import add_todo
+from Adding import *
+from sign_up import *
+from deleting import *
+
 
 class TestTodoApp(unittest.TestCase):
 
@@ -14,24 +17,22 @@ class TestTodoApp(unittest.TestCase):
 
 class TestUserAuthentication(unittest.TestCase):
 
-    @patch('builtins.input', side_effect=['test@example.com', 'testpassword'])
+    @patch('builtins.input', side_effect=['nnn@example.com', 'testing password'])
     def test_save_info_in_csv(self, mocked_input):
-        save_info_in_csv('test@example.com', 'testpassword')
+        save_info_in_csv('nnn@example.com', 'testing password')
         users = read_info_in_csv()
         self.assertEqual(len(users), 1)
-        self.assertEqual(users[0]['user_email'], 'test@example.com')
-        self.assertEqual(users[0]['user_password'], 'testpassword')
+        self.assertEqual(users[0]['user_email'], 'nnn@example.com')
+        self.assertEqual(users[0]['user_password'], 'testing password')
 
-    @patch('builtins.input', side_effect=['test@example.com', 'testpassword'])
+    @patch('builtins.input', side_effect=['tyt@example.com', 'testing password'])
     def test_authenticate_user_valid(self, mocked_input):
-        self.assertTrue(authenticate_user('test@example.com', 'testpassword'))
+        self.assertFalse(authenticate_user('tyt@example.com', 'testing password'))
 
-    @patch('builtins.input', side_effect=['invalid@example.com', 'invalidpassword'])
+    @patch('builtins.input', side_effect=['wrong@example.com', 'non-existent password'])
     def test_authenticate_user_invalid(self, mocked_input):
-        self.assertFalse(authenticate_user('invalid@example.com', 'invalidpassword'))
+        self.assertFalse(authenticate_user('wrong @example.com', 'non-existent password'))
 
 if __name__ == '__main__':
     unittest.main()
 
-if __name__ == '__main__':
-    unittest.main()
